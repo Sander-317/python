@@ -23,22 +23,12 @@ class Homeowner:
         else:
             raise ValueError("please enter a list")
         
-    def find_specialist(self, specialists_list):
+    def find_specialist(self, specialists_dict):
         new_list = []
         for need in self.needs:
-            print("need in find specialist  ", need)
-            for specialist in specialists_list:
-                print("specialist and need in find specialist  ", specialist.specialty, need)
-                # breakpoint()
-                if need == specialist.specialty:
-                    new_list.append((need, specialist.name, specialist.price))
-                    break
-                break        
-              
-            continue
-          
+          new_list.append((specialists_dict[need].name))
+          continue
         return new_list
-
 
 class Specialist:
     def __init__(self, name, price):
@@ -72,19 +62,17 @@ alfred = Homeowner("Alfred Alfredson","Alfredslane 123", ["painter", "plumber"] 
 bert = Homeowner("Bert Bertson","Bertslane 231",["plumber"])
 candice = Homeowner("Candice Candicedottir",  "Candicelane 312",["electrician", "painter"])
 
-
 # Specialists
-alice = Electrician("alice", 50)
-bob = Painter("bob", 50)
-craig = Plumber("craig", 50)
-specialists_list = [alice,bob,craig]
+alice = Electrician("alice von Wonderland", 50)
+bob = Painter("bob the Builder", 50)
+craig = Plumber("craig smith", 50)
 
-bert.find_specialist(specialists_list)
-test1 = alfred.find_specialist(specialists_list)
-print(test1)
+specialists_dict = {
+    "electrician": alice,
+    "painter": bob,
+    "plumber":craig,
+}
 
-# test = Electrician("dude", 30)
-# print(test.name,test.specialty)
-# print(specialists_list)
-# print(Homeowner("test dude", "test street", ["plumber"]))
-# print(alfred.name)
+print("Alfred's contracts:", alfred.find_specialist(specialists_dict))
+print("Bert's contracts:", bert.find_specialist(specialists_dict))
+print("Candice's contracts:", candice.find_specialist(specialists_dict))
